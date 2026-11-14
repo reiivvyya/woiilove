@@ -17,42 +17,45 @@ body {
   background: #000;
   color: white;
   font-family: monospace;
-  min-height: 100vh;
   overflow: hidden;
+  width: 100%;
+  height: 100vh;
 }
 
 /* HALAMAN AWAL */
 .start {
-  min-height: 100vh;
+  width: 100%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: black;
 }
 
 .window {
   width: 90%;
-  max-width: 420px;
+  max-width: 430px;
   border: 3px solid white;
-  box-shadow: 0 0 10px #fff;
-  padding: 12px;
-  text-align: center;
+  box-shadow: 0 0 12px white;
 }
 
 .top {
+  height: 30px;
   border-bottom: 2px solid white;
-  text-align: left;
-  padding-bottom: 8px;
+  padding: 7px;
   font-size: 12px;
+  letter-spacing: 5px;
 }
 
 .content {
-  padding: 55px 10px;
+  padding: 55px 15px;
+  text-align: center;
 }
 
-h2 {
+.content h2 {
   font-size: 22px;
   margin-bottom: 40px;
-  text-shadow: 0 0 8px white;
+  text-shadow: 0 0 10px white;
 }
 
 .buttons {
@@ -62,9 +65,9 @@ h2 {
 }
 
 button {
+  padding: 12px 30px;
   font-family: monospace;
   font-size: 17px;
-  padding: 12px 28px;
   cursor: pointer;
   font-weight: bold;
 }
@@ -81,119 +84,167 @@ button {
   border: 3px solid white;
 }
 
-/* HALAMAN LOVE YOU */
+button:active {
+  transform: scale(.92);
+}
+
+/* HALAMAN LOVE */
 .love-page {
   display: none;
-  min-height: 100vh;
-  position: relative;
+  position: fixed;
+  inset: 0;
+  background: black;
   overflow: hidden;
   justify-content: center;
   align-items: center;
-  background: #000;
 }
 
+/* HUJAN LOVE */
 .pattern {
   position: absolute;
-  inset: -20px;
-  display: grid;
-  grid-template-columns: repeat(9, 1fr);
-  gap: 8px;
-  transform: rotate(-2deg);
-  opacity: .65;
+  inset: 0;
+  overflow: hidden;
   pointer-events: none;
+  z-index: 1;
 }
 
 .pattern span {
+  position: absolute;
+  top: -100px;
   color: #ff168c;
   font-size: 13px;
   font-weight: bold;
-  line-height: 20px;
-  word-break: break-all;
-  text-shadow: 0 0 5px #ff168c;
-  animation: blink 1.5s infinite alternate;
+  white-space: nowrap;
+  text-shadow: 0 0 8px #ff168c;
+  animation: falling linear infinite;
 }
 
-@keyframes blink {
-  from { opacity: .25; }
-  to { opacity: .9; }
+@keyframes falling {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: .9;
+  }
+
+  85% {
+    opacity: .9;
+  }
+
+  100% {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
 }
 
+/* TENGAH */
 .center {
-  z-index: 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  width: 100%;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   animation: appear 1.2s ease;
 }
 
 @keyframes appear {
   from {
     opacity: 0;
-    transform: scale(.3);
+    transform: translate(-50%, -50%) scale(.3);
   }
+
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: translate(-50%, -50%) scale(1);
   }
 }
 
 .love-text {
-  font-size: clamp(30px, 8vw, 55px);
+  font-size: clamp(35px, 9vw, 55px);
   font-weight: bold;
   color: white;
+  white-space: nowrap;
   text-shadow:
-    0 0 5px #ff008c,
-    0 0 15px #ff008c,
-    0 0 30px #ff008c;
+    0 0 10px #ff008c,
+    0 0 25px #ff008c,
+    0 0 45px #ff008c;
   animation: glow 1s infinite alternate;
 }
 
 @keyframes glow {
-  from { text-shadow: 0 0 10px #ff008c; }
-  to { text-shadow: 0 0 30px #ff008c, 0 0 60px #ff008c; }
+  from {
+    text-shadow: 0 0 10px #ff008c;
+  }
+
+  to {
+    text-shadow:
+      0 0 20px #ff008c,
+      0 0 40px #ff008c,
+      0 0 60px #ff008c;
+  }
 }
 
 .heart {
-  font-size: 105px;
+  font-size: 110px;
+  line-height: 1.2;
+  margin-top: 5px;
   color: white;
-  margin-top: 12px;
-  line-height: 1.3;
-  filter: drop-shadow(0 0 10px #ff008c)
-          drop-shadow(0 0 25px #ff008c);
+  filter:
+    drop-shadow(0 0 10px #ff008c)
+    drop-shadow(0 0 25px #ff008c);
   animation: heartbeat 1s infinite;
 }
 
 @keyframes heartbeat {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.18); }
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.18);
+  }
 }
 
 .message {
   color: #ff8acb;
-  font-size: 14px;
+  font-size: 13px;
   margin-top: 15px;
   text-shadow: 0 0 8px #ff008c;
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- HALAMAN PERTANYAAN -->
+<!-- PERTANYAAN -->
 <div class="start" id="start">
+
   <div class="window">
+
     <div class="top">● ● ●</div>
 
     <div class="content">
+
       <h2>Do you love me?</h2>
 
       <div class="buttons">
-        <button id="yes" onclick="showLove()">
+
+        <button id="yes" onclick="showLove(false)">
           Yes
         </button>
 
-        <button id="no" onclick="showLove()">
+        <button id="no" onclick="showLove(true)">
           No
         </button>
+
       </div>
     </div>
   </div>
@@ -205,34 +256,70 @@ button {
   <div class="pattern" id="pattern"></div>
 
   <div class="center">
-    <div class="love-text">LOVE YOU</div>
 
-    <div class="heart">♥</div>
+    <div class="love-text">
+      LOVE YOU
+    </div>
+
+    <div class="heart">
+      ♥
+    </div>
 
     <div class="message">
       YOU ARE MY FAVORITE PERSON ♡
     </div>
-  </div>
 
+  </div>
 </div>
+
+<!-- LAGU -->
+<audio id="mySong" preload="auto">
+  <source src="ssstik.io_1793708472255.mp3" type="audio/mpeg">
+</audio>
 
 <script>
 
-// Membuat tulisan LOVE YOU berulang
+// MEMBUAT HUJAN TULISAN LOVE YOU
 const pattern = document.getElementById("pattern");
 
-for (let i = 0; i < 350; i++) {
+for (let i = 0; i < 180; i++) {
+
   const text = document.createElement("span");
+
   text.textContent = "I LOVE YOU";
+
+  text.style.left = Math.random() * 100 + "%";
+
+  text.style.animationDuration =
+    (3 + Math.random() * 6) + "s";
+
+  text.style.animationDelay =
+    (Math.random() * 8) + "s";
+
+  text.style.fontSize =
+    (10 + Math.random() * 7) + "px";
+
   pattern.appendChild(text);
 }
 
-// Pindah halaman
-function showLove() {
+// PINDAH KE HALAMAN LOVE
+function showLove(playMusic) {
+
   document.getElementById("start").style.display = "none";
 
-  const page = document.getElementById("lovePage");
-  page.style.display = "flex";
+  document.getElementById("lovePage").style.display = "flex";
+
+  if (playMusic) {
+
+    const song = document.getElementById("mySong");
+
+    song.currentTime = 0;
+
+    song.play().catch(error => {
+      console.log("Audio gagal diputar:", error);
+    });
+
+  }
 }
 
 </script>
